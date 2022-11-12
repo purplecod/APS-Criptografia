@@ -1,4 +1,4 @@
-from Menu import Menu,Limpador
+from Menu import Menu,Limpador,Titulo
 from MaquinaEnigima import MaquinaEnigima
 from time import sleep
 
@@ -9,6 +9,8 @@ Maquina = MaquinaEnigima()
 
 while True:
     while True:
+    
+     # Menu principal.
         try:
             Limpador()
             Menu(["Criptografar Texto","Descriptografar Texto","Alterar Chave","Encerrar"])
@@ -27,42 +29,54 @@ while True:
 
     if OpçãoEscolhida == 1:
         while True:
+            # Criptografia. 
             try:
                 Limpador()
-                TextoASerCriptografado = input("AVISO: Não use acentos, escreva numeros por extenço e não use caracteres desse tipo: #%¨&=+/ \nEscreva o texto (Digite $$ para voltar ao menu inicial): ")
+                Titulo("Criptografando")
+                TextoASerCriptografado = input("Escreva o texto (Digite $$ para voltar ao menu inicial): ")
+
                 if TextoASerCriptografado == "$$":
                     break
-                print(Maquina.UsarMaquinaEnigima(TextoASerCriptografado,Criptografar))
-                Repetir = input("\nA criptografia foi um sucesso, quer tentar outro texto? [S/N]")
 
-                if Repetir.upper() == "N":
+                print(f"\nTexto criptografado:\n {Maquina.UsarMaquinaEnigima(TextoASerCriptografado,Criptografar)}")
+                Repitir = input("\nA criptografia foi um sucesso, quer tentar outro texto? [S/N]")
+
+                if Repitir.upper() == "N":
                     break
             
             except ValueError:
                 Repitir = input("Ocorreu um erro na criptografia. Quer tentar de novo? [S/N]")
-                if Repetir.upper() == "N":
+                if Repitir.upper() == "N":
                     break               
 
     elif OpçãoEscolhida == 2:
         while True:
+            # Descriptografia. 
             try:
                 Limpador()
+                Titulo("Descriptografando")
                 TextoASerDescriptografado = input("AVISO: Se caso a chave que foi usada pra criptografar esse texto for diferente da atual, o texto não vai fazer sentido.\nDigite o texto criptografado (Digite $$ para voltar ao menu inicial): ")
+
                 if TextoASerDescriptografado == "$$":
                     break
-                print(Maquina.UsarMaquinaEnigima(TextoASerDescriptografado,Descriptografar))
-                Repetir = input("\nA descriptografia foi um sucesso, quer tentar outro texto? [S/N]")
 
-                if Repetir.upper() == "N":
+                print(f"\nTexto descriptografado:\n {Maquina.UsarMaquinaEnigima(TextoASerDescriptografado,Descriptografar)}")
+                Repitir = input("\nA descriptografia foi um sucesso, quer tentar outro texto? [S/N]")
+
+                if Repitir.upper() == "N":
                     break
+
             except ValueError:
                 Repitir = input("Ocorreu um erro na descriptografia. Quer tentar de novo? [S/N]")
-                if Repetir.upper() == "N":
+
+                if Repitir.upper() == "N":
                     break         
 
     elif OpçãoEscolhida == 3:
         while True:
+            # Informações da chave.
             Limpador()
+            Titulo("Chave")
             print(Maquina.InformaçõesDaChave())
             PersonalizarChave = input("Deseja modificar a chave? [S/N]: ")
             if PersonalizarChave.upper() == "S":
@@ -89,5 +103,6 @@ while True:
                             sleep(2)
                             Limpador()
             break
-
+        
+    # Encerrando o programa
     else:break
